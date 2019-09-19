@@ -15,7 +15,7 @@ int main() {
  printf("%d\n", add(a, b));
 }
 -----
-예상되는 문제
+예상되는 문제입니다 -구조체를 선언과 동시에 초기화 하여 18 jcshim 을 출력하시오-
 #include<stdio.h>
 struct user{
 	int age;
@@ -24,6 +24,3 @@ struct user{
 void main(){
 	printf("%d %s\n", me.age, me.n);
 }
-구조체를 선언과 동시에 초기화 하여 18 jcshim 을 출력하시오
-------
-작성소감 
