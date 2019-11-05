@@ -1,26 +1,62 @@
-#include<stdio.h>
-#include<stdlib.h>
-int add(int a, int b) {
- return a + b;
+1. 리스트의 종류와 설명
+
+단일 연결 리스트, 이중 연결 리스트, 원형 연결 리스트가 있습니다. 
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct list {
+ int d;
+ struct list* p;
+} LIST;
+LIST* root = NULL;
+LIST* last = NULL;
+void AddList(int a){
+ LIST* r = (LIST*)malloc(sizeof(LIST));
+ r->d = a;
+ r->p = NULL;
+ if(root==NULL) root = r;
+ else           last->p = r;
+ last = r;
 }
-int main() {
- int a, b;
- FILE* fp = fopen("my.txt", "r");
- if (fp == NULL) { 
-  puts("File not found!!");
-  exit(0); 
+int main(void){
+ AddList(35);
+ AddList(40);
+ AddList(45);
+ while(root){
+  printf("%d\n", root->d);
+  root = root->p;
  }
- fscanf(fp, "%d%d", &a, &b);
- fclose(fp);
- printf("%d\n", add(a, b));
 }
------
-예상되는 문제입니다 -구조체를 선언과 동시에 초기화 하여 18 jcshim 을 출력하시오-
-#include<stdio.h>
-struct user{
-	int age;
-	char n[80];
-} me = {18, "jcshim"};
-void main(){
-	printf("%d %s\n", me.age, me.n);
+
+2. 트리의 종류와 설명
+
+완전 이진 트리, 포화 이진 트리, 정 이진 트리, 편향 이진 트리가 있습니다. 
+
+.... 5  ....
+..3.. ...7
+.............8
+
+#include <stdio.h>
+#include <stdlib.h>            
+typedef struct Tree {
+    struct Tree *l, *r;
+    int d;
+} T;
+void print(T* p){
+   printf("%d\n", p->d);
+   if(p->l) print(p->l);
+   if(p->r) print(p->r);    
+}
+T* mem(){
+ T* p=(T*)malloc(sizeof(T));
+ p->l=p->r=NULL;
+ return(p);
+}
+int main(void){
+    T *r, *r1, *r2, *l1;
+    l1= (T*)mem(); l1->d=3; 
+    r2= (T*)mem(); r2->d=8; 
+    r1= (T*)mem(); r1->d=7; r1->r=r2;
+    r= (T*)mem(); r->d=5; r->l=l1;  r->r=r1;
+    print(r);
 }
