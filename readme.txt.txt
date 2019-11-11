@@ -116,6 +116,96 @@ int main(void){
 사이클릭 그래프 : 하나 이상의 서클이 있는 그래프 
 에이사이클릭 그래프 : 서클이 없는 그래프
 
+#include <iostream>
+
+using namespace std;
+
+int main()
+
+{
+
+	// 변수 선언
+
+	int vertex, **matrix;
+
+	// 정점(vetex) 개수 입력
+
+	cin >> vertex;
+
+	// 인접 행렬 동적할당 (v x v)
+
+	matrix = new int*[vertex]; 
+
+	for (int i = 0; i < vertex; i++) {
+
+		matrix[i] = new int[vertex];
+
+	}
+
+	// 인접 행렬 초기화
+
+	for (int i = 0; i < vertex; i++) {
+
+		for (int j = 0; j < vertex; j++) {
+
+			matrix[i][j] = 0;
+		}
+	}
+	// 간선(edge) 입력 (-1 입력 시 종료)
+ 
+	while (1) {
+ 
+		int edge1, edge2;
+  
+		cin >> edge1 >> edge2;
+  
+		// 종료 조건
+  
+		if (edge1 == -1 || edge2 == -1)
+			break;
+   
+		// matrix 범위 초과
+  
+		else if (edge1 > vertex || edge2 > vertex)
+  
+			continue;
+   
+		// 이미 연결 된 간선인 경우
+  
+		else if (matrix[edge1][edge2] == 1 && matrix[edge2][edge1] == 1)
+  
+			continue;
+   
+		// 인접 행렬에 입력
+  
+		matrix[edge1][edge2] = 1;
+  
+		matrix[edge2][edge1] = 1;
+	}
+	// 인접행렬 출력
+ 
+	for (int i = 0; i < vertex; i++) {
+ 
+		for (int j = 0; j < vertex; j++) {
+  
+			cout << matrix[i][j] << " ";
+		}
+  
+		cout << "\n";
+	}
+ 
+	// 메모리 해제
+	for (int i = 0; i < vertex; i++) {
+		delete[] matrix[i];
+	}
+ 
+	delete[] matrix;
+ 
+	// 프로그램 종료
+ 
+	return 0;
+}
+
 4. 소감
 이번 수업을 들으면서 자료구조에 대해 더 깊이 이해할 수 있었고, c언어에 더 흥미를 느끼게 되었습니다.
 리스트와 트리를 복습하면서 이해가 되지 않았던 부분들을 이해할 수 있었습니다.
